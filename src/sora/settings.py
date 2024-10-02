@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-_l8gisd5&-s@7vdcxinthlwd!u&n9%0!3i10$c+cnqc8b)-so='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', cast=bool, default=True)
+DEBUG = config(option='DEBUG', cast=bool, default=True)
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost'] if DEBUG else ['.railway.app']
 
 # Application definition
@@ -83,6 +83,18 @@ DATABASES = {
     }
 }
 
+DB_CONN_MAX_AGE = config(option='CONN_MAX_AGE', cast=int, default=30)
+DB_CONN_STRR = config(option='DB_CONN_STRR', cast=str, default=None)
+
+if DB_CONN_STRR:
+    import dj_database_url
+    DATABASES['default'].update(
+       dj_database_url.config(
+            default=DB_CONN_STRR,
+            conn_max_age=DB_CONN_MAX_AGE,
+            conn_health_checks=True
+        )
+   )
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
