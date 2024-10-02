@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,9 +24,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-_l8gisd5&-s@7vdcxinthlwd!u&n9%0!3i10$c+cnqc8b)-so='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.railway.app'] if DEBUG else ['.railway.app']
+DEBUG = config('DEBUG', cast=bool, default=True)
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost'] if DEBUG else ['.railway.app']
 
 # Application definition
 STARTED_APPS = [
@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-] + STARTED_APPS
+    *STARTED_APPS,
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
