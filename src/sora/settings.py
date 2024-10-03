@@ -22,11 +22,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config(option='DJANGO_SECRET_KEY')
-print('SECRET_KEY', SECRET_KEY)
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config(option='DEBUG', cast=bool, default=True)
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.railway.app'] if DEBUG else ['.railway.app']
-print('DEBUG', DEBUG)
+
 # Application definition
 STARTED_APPS = [
     'visits',
@@ -87,7 +87,6 @@ DATABASES = {
 DB_CONN_MAX_AGE = config(option='CONN_MAX_AGE', cast=int, default=30)
 DB_CONN_STRR = config(option='DB_CONN_STRR', default=None)
 
-print('DB_CONN_STRR', DB_CONN_STRR)
 
 if DB_CONN_STRR:
     import dj_database_url
