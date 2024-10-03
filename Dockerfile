@@ -55,7 +55,7 @@ RUN pip install -r /tmp/requirements.txt
 RUN python manage.py vendor_pull
 RUN python manage.py collectstatic --noinput
 
-RUN unset SECRET_KEY
+RUN unset DJANGO_SECRET_KEY
 # set the Django default project name
 ARG PROJ_NAME="sora"
 
