@@ -133,6 +133,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_BASE_DIR = BASE_DIR / 'staticfiles'
+STATICFILES_BASE_DIR.mkdir(parents=True, exist_ok=True)
 STATICFILES_VENDOR_DIR = STATICFILES_BASE_DIR / 'vendors'
 
 # Source(s) for python manage.py collectstatic
