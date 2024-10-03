@@ -37,7 +37,7 @@ WORKDIR /code
 # Copy the requirements file into the container
 COPY requirements.txt /tmp/requirements.txt
 
-ARG DJANGO_SECRET_KEY
+ARG DJANGO_SECRET_KEY=django-insecure-_l8gisd5&-s@7vdcxinthlwd!u&n9%0!3i10$c+cnqc8b)-so=
 ENV DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
 
 ARG DJANGO_DEBUG=0
