@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     *STARTED_APPS,
 ]
 
+EXTRA_MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -51,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    *EXTRA_MIDDLEWARE
 ]
 
 ROOT_URLCONF = 'sora.urls'
