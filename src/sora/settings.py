@@ -59,6 +59,7 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage", 
     },
 }
+
 ROOT_URLCONF = 'sora.urls'
 
 TEMPLATES = [

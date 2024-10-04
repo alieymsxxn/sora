@@ -15,4 +15,8 @@ class Command(BaseCommand):
     def handle(self, *args: Any, **options: Any):
         for filename, url in self.VENDOR_STATICFILES.items():
             destination = self.STATICFILES_VENDOR_DIR / filename
-            helpers.download_to_local(url=url, out_path=destination, parent_mkdir=True)
+            status = helpers.download(url=url, out_path=destination, parent_mkdir=True)
+            if status:
+                self.stdout.write(self.style.SUCCESS(f'Successfully downloaded {filename} into {destination}'))
+            else:
+                self.stdout.write(self.style.ERROR(f'Successfully downloaded {filename} into {destination}'))
