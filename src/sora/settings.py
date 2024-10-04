@@ -23,8 +23,8 @@ EMAIL_HOST_USER = config(option='EMAIL_HOST_USER', cast=str, default=None)
 EMAIL_HOST_PASSWORD = config(option='EMAIL_HOST_PASSWORD', cast=str, default=None)
 EMAIL_USE_TLS = config(option='EMAIL_USE_TLS', cast=bool, default=True)
 EMAIL_USE_SSL = config(option='EMAIL_USE_SSL', cast=bool, default=False)
-DEFAULT_FROM_EMAIL = config(option='EMAIL_HOST_USER', cast=str, default=None)
-SERVER_EMAIL = config(option='EMAIL_HOST_USER', cast=str, default=None)
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+SERVER_EMAIL = EMAIL_HOST_USER
 
 # Setting admins and managers
 ADMIN_NAMES = config(option='ADMIN_NAMES', cast=Csv(), default='')
