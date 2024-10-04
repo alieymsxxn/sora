@@ -52,7 +52,7 @@ RUN pip install -r /tmp/requirements.txt
 # database isn't available during build
 # run any other commands that do not need the database
 # such as:
-RUN python manage.py vendor_pull
+RUN python manage.py fetch_vendor
 RUN python manage.py collectstatic --noinput
 
 RUN unset DJANGO_SECRET_KEY
