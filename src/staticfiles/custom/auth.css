@@ -1,0 +1,71 @@
+.container h1 {
+    text-align: center;
+    margin: 0px !important;
+}
+.label {
+    padding: 2px;
+}
+.label-text {
+    font-size: 14px;
+    margin-top: 14px;
+    margin-bottom: 3px;
+}
+.subheading, .subheading a {
+    font-size: 14px;
+    color: rgb(63 63 70); 
+}
+.subheading a {
+    font-style: bold;
+}
+.input {
+    padding: 10px !important;
+    height: 40px;
+    border-radius: 3px !important;
+    color: black !important;
+    border-color: #bdc3c7 !important;
+}
+.my-3 {
+    width: 100%;
+    color: white;
+    margin-top: 30px !important;
+    background: #226FF9 !important;
+    border-color: #226FF9 !important;
+    border-radius: 3px !important;
+}
+.container {
+    height: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+body {
+    height: 100vh !important; 
+    display: flex; 
+    justify-content: space-between;
+    flex-direction: column;
+}
+.cursor-pointer .checkbox {
+    border-radius: 5px;
+}
+.cursor-pointer .label-text {
+    font-size: 13px;
+    margin: 1px 5px;
+}
+.container form {
+    padding: 0px;
+}
+
+.container .authlogo {
+    max-width: 25px;
+}
+.container .footnote {
+    font-size: 12px;
+}
+.container .footnote a {
+    text-decoration: underline;
+    cursor: pointer;
+    color: #7b7d7d;
+}
+.container .footnote a:hover {
+    color: black;
+}
