@@ -42,7 +42,8 @@ SECRET_KEY = config(option='DJANGO_SECRET_KEY')
 DEBUG = config(option='DEBUG', cast=bool, default=True)
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.railway.app'] if DEBUG else ['.railway.app']
 
-CSRF_TRUSTED_ORIGINS = ['127.0.0.1', 'localhost', '.railway.app'] if DEBUG else ['.railway.app']
+CSRF_TRUSTED_ORIGINS = ['http://*.127.0.0.1', 'http://*.localhost', 'https://*.railway.app'] if DEBUG else ['https://*.railway.app']
+
 # Application definition
 STARTED_APPS = [
     'visits',
