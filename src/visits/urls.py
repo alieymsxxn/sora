@@ -18,5 +18,5 @@ from django.urls import path, reverse, reverse_lazy
 from visits.views import homepage
 
 urlpatterns = [
-    path('', homepage, name='lala')
+    path('', homepage, name='home')
 ]
