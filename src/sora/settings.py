@@ -210,4 +210,4 @@ ACCOUNT_EMAIL_VERIFICATION='mandatory'
 ACCOUNT_EMAIL_SUBJECT_PREFIX='[Sora] '
 ACCOUNT_EMAIL_REQUIRED=True
 
-CSRF_TRUSTED_ORIGINS = ['https://*.mydomain.com','https://*.127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['https://*.railway.app','https://*.127.0.0.1']
