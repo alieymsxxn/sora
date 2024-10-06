@@ -42,6 +42,7 @@ SECRET_KEY = config(option='DJANGO_SECRET_KEY')
 DEBUG = config(option='DEBUG', cast=bool, default=True)
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.railway.app'] if DEBUG else ['.railway.app']
 
+CSRF_TRUSTED_ORIGINS = ['127.0.0.1', 'localhost', '.railway.app'] if DEBUG else ['.railway.app']
 # Application definition
 STARTED_APPS = [
     'visits',
@@ -209,5 +210,3 @@ ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_VERIFICATION='mandatory'
 ACCOUNT_EMAIL_SUBJECT_PREFIX='[Sora] '
 ACCOUNT_EMAIL_REQUIRED=True
-
-CSRF_TRUSTED_ORIGINS = ['https://*.railway.app','https://*.127.0.0.1']
