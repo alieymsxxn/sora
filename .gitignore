@@ -65,6 +65,7 @@ db.sqlite3-journal
 test.py
 src/staticfiles/vendors/
 local-cdn
+.vscode
 # Flask stuff:
 instance/
 .webassets-cache
