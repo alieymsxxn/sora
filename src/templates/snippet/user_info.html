@@ -1,5 +1,9 @@
+<div class="flex justify-center items-center flex-col">
+<p class="text-lg font-medium">Homepage</p>
+<br>
 {% if user.is_authenticated %}
-<p class="text-lg font-medium">User is authenticated</p>
+<p class="text-lg font-medium">User is authenticated as {{user.username}}.</p>
 {% else %}
 <p class="text-lg font-medium">User is not authenticated</p>
 {% endif %}
+</div>
