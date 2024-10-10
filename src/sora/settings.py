@@ -48,6 +48,8 @@ CSRF_TRUSTED_ORIGINS = ['http://*.127.0.0.1', 'http://*.localhost', 'https://*.r
 STARTED_APPS = [
     'visits',
     'console',
+    'subscriptions',
+    'customers',
 ]
 
 # Vendor apps definition
@@ -58,7 +60,7 @@ VENDOR_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.github',
     "widget_tweaks",
-    'slippers'
+    'slippers',
 ]
 
 INSTALLED_APPS = [
@@ -82,6 +84,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
+    # 'console.utils.middlewares.log.EssentialLogs',
+    # 'console.utils.middlewares.beta_log.BetaLog'
 ]
 
 STORAGES = {
@@ -103,6 +107,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'console.utils.templates.context_processors.augmentation'
             ],
         },
     },
@@ -193,9 +198,6 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 
 ]
-
-
-    
 
 SOCIALACCOUNT_PROVIDERS = {
     'github': {
