@@ -5,11 +5,11 @@ from decouple import config
 class Billing:
     __STRIPE_SECRET_KEY = config(option='STRIPE_SECRET_KEY', cast=str, default='')
     __DEBUG = config(option='DEBUG', cast=bool, default=True)
+    stripe.api_key = __STRIPE_SECRET_KEY
 
     def __init__(self) -> None:
         if 'sk_test' in self.__STRIPE_SECRET_KEY and not self.__DEBUG:
             raise ValueError('Invalid Stripe key provided for non-test environment.')
-        stripe.api_key = self.__STRIPE_SECRET_KEY
 
     @classmethod
     def __search(cls, resource: stripe.APIResource, **kwargs) -> Union[bool, str]:
