@@ -15,6 +15,8 @@ from decouple import config, Csv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+BASE_URL = config(option='BASE_URL', default=None)
+
 # Default email backend
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = config(option='EMAIL_HOST', cast=str, default=None)
@@ -50,6 +52,7 @@ STARTED_APPS = [
     'console',
     'subscriptions',
     'customers',
+    'checkouts',
 ]
 
 # Vendor apps definition
@@ -84,8 +87,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
-    # 'console.utils.middlewares.log.EssentialLogs',
-    # 'console.utils.middlewares.beta_log.BetaLog'
+    'console.utils.middleware.subscription.SubscriptionMiddleware',
+    'console.utils.middleware.profile.ProfileMiddleware'
 ]
 
 STORAGES = {
@@ -211,5 +214,5 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_VERIFICATION='mandatory'
-ACCOUNT_EMAIL_SUBJECT_PREFIX='[Sora] '
+ACCOUNT_EMAIL_SUBJECT_PREFIX='Sora'
 ACCOUNT_EMAIL_REQUIRED=True
