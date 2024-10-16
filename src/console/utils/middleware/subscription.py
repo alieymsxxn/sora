@@ -4,8 +4,7 @@ from subscriptions.models import UserSubscription
 class SubscriptionMiddleware(MiddlewareMixin):
     def process_request(self, request):
         user = request.user
-        if user.is_authenticated:
-            user_subscription = UserSubscription.objects.filter(user=user, active=True).first()
+        if user.is_authenticated and hasattr(user, 'usersubscription'):
             user_subscription = user.usersubscription
             intervals = filter(lambda interval: user_subscription.price.interval == interval, user_subscription.price.Interval)
             interval = next(intervals, None)
