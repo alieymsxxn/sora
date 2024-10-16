@@ -16,16 +16,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from allauth.account import views as allauth_views
-from allauth.socialaccount.providers.github.views import oauth2_login
 
 urlpatterns = [
     # path('signin/', allauth_views.login, name='login'),
     # path('signup/', allauth_views.signup, name='signup'),
     # path('logout/', allauth_views.logout, name='logout'),
     # path('confirm-email/', allauth_views.confirm_email, name='confirm_email'),
-    path('github/login/', oauth2_login, name='github-login'),
-    path('accounts/', include('allauth.urls')),
+    # path('github/login/', oauth2_login, name='github-login'),
     path('', include('visits.urls')), # index page / root page
+    path('', include('checkouts.urls')),
+    path('', include('customers.urls')),
+    path('accounts/', include('allauth.urls')),
+    path('', include('subscriptions.urls')),
     path('admin/', admin.site.urls),
 ]
