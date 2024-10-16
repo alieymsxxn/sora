@@ -2,8 +2,13 @@
 <p class="text-lg font-medium">Homepage</p>
 <br>
 {% if user.is_authenticated %}
-<p class="text-lg font-medium">User is authenticated as {{user.username}}.</p>
+    <p class="text-lg font-medium">User is authenticated as {{user.username}}.</p>
+    {% if user.is_subscribed %}
+        <p class="text-lg font-medium">User is subscribed to plan {{ user.price }}</p>
+    {% else %}
+        <p class="text-lg font-medium">User is not subscribed.</p>
+    {% endif %}
 {% else %}
-<p class="text-lg font-medium">User is not authenticated</p>
+    <p class="text-lg font-medium">User is not authenticated</p>
 {% endif %}
 </div>

@@ -1,0 +1,16 @@
+<div class="flex justify-center">
+    <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 dark:text-gray-400">
+        {% for interval in intervals %}
+        <li class="me-2">
+            <a href="{% url 'pricing' interval=interval %}" 
+            class="inline-block px-4 py-3 
+            {% if interval == active_interval %}
+            text-white bg-blue-600 rounded-lg active
+            {% else %}
+            rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-white
+            {% endif %}"
+            aria-current="page">{{ interval | title}}</a>
+        </li>
+        {% endfor %}
+    </ul>            
+</div>

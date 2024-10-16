@@ -17,8 +17,12 @@
         {% endblock extra_head %}
         {% include 'base/css.html' %}
     </head>
-    <body class="h-full bg-base-300">
+    <body class="h-full bg-base-300 bg-white">
         {% include 'nav/navbar.html' %}
+        <div class="mx-auto max-w-screen-md text-center mb-8 lg:mb-12">
+            <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Designed for business teams like yours</h2>
+            <p class="mb-5 font-light text-gray-500 sm:text-xl dark:text-gray-400">Here at Sora we focus on markets where technology, innovation, and capital can unlock long-term value and drive economic growth.</p>
+        </div>
         {% block body %}
             <!-- {% if messages %}
                 {% for message in messages %}

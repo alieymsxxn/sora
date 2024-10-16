@@ -3,9 +3,9 @@
 {% load static %}
 {% load allauth_ui %}
 {% load widget_tweaks %}
-{% block head_title %}{% trans 'Sign In' %} - Sora{% endblock head_title %}
+{% block head_title %}{% trans 'Log In' %} | Sora{% endblock head_title %}
 {% block content %}
-    {% trans "Sign In" as heading %}
+    {% trans "Log In" as heading %}
     {% url "account_signup" as signup_url %}
     {% #container heading=heading  %}
     {% if not SOCIALACCOUNT_ONLY %}
