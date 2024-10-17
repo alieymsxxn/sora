@@ -23,7 +23,9 @@ urlpatterns = [
     # path('logout/', allauth_views.logout, name='logout'),
     # path('confirm-email/', allauth_views.confirm_email, name='confirm_email'),
     # path('github/login/', oauth2_login, name='github-login'),
-    path('', include('visits.urls')), # index page / root page
+    path('', include('landing.urls')),
+    path('', include('dashboard.urls')),
+    # path('', include('visits.urls')), # index page / root page
     path('', include('checkouts.urls')),
     path('', include('customers.urls')),
     path('accounts/', include('allauth.urls')),
