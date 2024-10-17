@@ -7,10 +7,15 @@
     <title>{% block head_title %}{% trans 'Sora' %}{% endblock head_title %}</title>
     {% include 'base/css.html' %}
 </head>
-<body style="height: 100vh !important; display: flex; justify-content: space-between;flex-direction: column;">
-        {% include 'nav/navbar.html' %}
+<body style="height: 100vh !important;">
+        <div class="w-full h-screen flex flex-col justify-between">
+        {% block nav %}{% include 'snippet/nav.html' %}{% endblock nav %}
+        <div>
+            
+        </div>
         {% block content %}{% endblock content %}
         {% include 'footer/footer.html' %}
+    </div>
     {% include 'base/js.html' %}
 </body>
 </html>

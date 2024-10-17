@@ -4,16 +4,16 @@
 {% load widget_tweaks %}
 {% block head_title %}{% trans 'Sign Up' %} | Sora{% endblock head_title %}
 {% block content %}
-    {% url "account_login" as login_url %}
-    {% trans "Create an account" as heading %}
-    {% trans "Create account" as button_text %}
-    {% blocktranslate asvar subheading %}     
+        {% blocktranslate asvar subheading %}     
     <p class="text-sm w-full footnote text-center">Already have an account? Then please <a href="{{ login_url }}">sign in. </a></p>
     {% endblocktranslate %}
-    {% #container heading=heading subheading=subheading  %}
+    {% #container %}
+    <div class="mx-auto max-w-screen-md text-center mb-8 lg:mb-12">
+        <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Create a Free Account</h2>
+    </div>
     {% if not SOCIALACCOUNT_ONLY %}
         {% url 'signup' as action_url %}
-        {% #form form=form url=action_url button_text=button_text %}
+        {% #form form=form url=action_url button_text='CREATE ACCOUNT' %}
         {{ redirect_field }}
         {% csrf_token %}
         {% /form %}
@@ -21,6 +21,7 @@
     <!-- {% if SOCIALACCOUNT_ENABLED %}
         {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
     {% endif %} -->
+    <p class="label-text-second-outer text-center">Already have an account? <a class="label-text-second" href="{% url 'account_login' %}">Login here.</a></p>
     
     {% /container %}
 {% endblock %}

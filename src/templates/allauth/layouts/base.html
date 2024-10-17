@@ -18,11 +18,8 @@
         {% include 'base/css.html' %}
     </head>
     <body class="h-full bg-base-300 bg-white">
-        {% include 'nav/navbar.html' %}
-        <div class="mx-auto max-w-screen-md text-center mb-8 lg:mb-12">
-            <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Designed for business teams like yours</h2>
-            <p class="mb-5 font-light text-gray-500 sm:text-xl dark:text-gray-400">Here at Sora we focus on markets where technology, innovation, and capital can unlock long-term value and drive economic growth.</p>
-        </div>
+        {% include 'snippet/nav.html' %}
+
         {% block body %}
             <!-- {% if messages %}
                 {% for message in messages %}
@@ -32,9 +29,10 @@
                     </div>
                 {% endfor %}
             {% endif %} -->
+            
             {% block content %}
             {% endblock content %}
-            <div class="mx-auto [&_a]:link text-sm flex flex-col md:flex-row items-center justify-center gap-3 mt-3">
+            <!-- <div class="mx-auto [&_a]:link text-sm flex flex-col md:flex-row items-center justify-center gap-3 mt-3">
                 {% if user.is_authenticated %}
                     {% url 'account_email' as email_url %}
                     {% if email_url %}
@@ -56,7 +54,7 @@
                     {% if logout_url %}
                         <a href="{{ logout_url }}">{% trans "Sign Out" %}</a>
                     {% endif %}
-                {% else %}
+                {% else %} -->
                     <!-- {% url 'login' as login_url %} -->
                     <!-- {% if login_url %}
                         <a href="{{ login_url }}">{% trans "Sign In" %}</a>
@@ -65,8 +63,8 @@
                     {% if signup_url %}
                         <a href="{{ signup_url }}">{% trans "Sign Up" %}</a>
                     {% endif %} -->
-                {% endif %}
-            </div>
+                <!-- {% endif %}
+            </div> -->
         {% endblock body %}
         {% block extra_body %}
         {% endblock extra_body %}
