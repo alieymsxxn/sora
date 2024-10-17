@@ -216,3 +216,7 @@ ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_VERIFICATION='mandatory'
 ACCOUNT_EMAIL_SUBJECT_PREFIX='Sora'
 ACCOUNT_EMAIL_REQUIRED=True
+
+ACCOUNT_FORMS = {'login': 'console.utils.forms.subscriptions.forms.CustomLoginForm',
+                 'signup': 'console.utils.forms.subscriptions.forms.CustomSignUpForm',
+                 'change_password': 'console.utils.forms.subscriptions.forms.CustomChangePasswordForm'}
