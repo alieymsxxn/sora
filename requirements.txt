@@ -15,3 +15,5 @@ langchain
 langchain_community
 langchain-groq
 chromadb
+django-storages 
+boto3
