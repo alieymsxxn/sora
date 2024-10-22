@@ -9,3 +9,8 @@ django-allauth[socialaccount]
 django-allauth-ui
 django-widget-tweaks
 stripe
+langchain
+langchain_community
+langchain-groq
+chromadb
+pandas
