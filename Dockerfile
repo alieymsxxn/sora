@@ -52,6 +52,7 @@ RUN pip install -r /tmp/requirements.txt
 # database isn't available during build
 # run any other commands that do not need the database
 # such as:
+ENV DJANGO_SETTINGS_MODULE=sora.settings.production 
 RUN python manage.py fetch_vendor
 RUN python manage.py collectstatic --noinput
 
