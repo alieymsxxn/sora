@@ -24,6 +24,7 @@ urlpatterns = [
     # path('confirm-email/', allauth_views.confirm_email, name='confirm_email'),
     # path('github/login/', oauth2_login, name='github-login'),
     path('', include('landing.urls')),
+    path('', include('generative.urls')),
     path('', include('dashboard.urls')),
     # path('', include('visits.urls')), # index page / root page
     path('', include('checkouts.urls')),

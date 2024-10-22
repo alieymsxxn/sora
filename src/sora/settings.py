@@ -53,6 +53,7 @@ STARTED_APPS = [
     'subscriptions',
     'customers',
     'checkouts',
+    'generative',
 ]
 
 # Vendor apps definition
