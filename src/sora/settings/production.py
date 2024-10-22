@@ -1,10 +1,9 @@
 from .base import *
 
 # Setting compatible sqlite version for Chromadb
-if not DEBUG:
-    __import__('pysqlite3')
-    import sys
-    sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 # Overriding storages for production
 STORAGES = { }
