@@ -40,9 +40,7 @@ function validate_fields() {
     if (isEmpty(url)) {
         document.getElementById('url_label').classList.replace("text-gray-900", "text-red-600")
         url.classList.add('input-red')
-        // document.getElementById('url_error_msg').innerText = 'It looks like you’ve missed providing the URL.'
-        let textNode = url_error_msg.childNodes[2];  // Get the text node
-        textNode.textContent = 'It looks like you’ve missed providing the URL.';
+        document.getElementById('url_error_msg').innerText = 'It looks like you’ve missed providing the URL.'
         valid = false
     } else if (isValidUrl(url)) {
         document.getElementById('services_label').classList.replace("text-gray-900", "text-red-600")
