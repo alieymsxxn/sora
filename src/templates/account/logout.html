@@ -1,0 +1,19 @@
+{% extends "account/logout.html" %}
+{% load i18n %}
+{% load allauth_ui %}
+{% block content %}
+    {% trans "Log Out" as heading %}
+    {% trans "Are you sure you want to sign out?" as subheading %}
+    {% url 'account_logout' as action_url %}
+    {% #container %}
+    <div class="mx-auto max-w-screen-md text-center mb-8 lg:mb-12">
+        <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Log out?</h2>
+        <p>Are you sure you want to log out?</p>
+    </div>
+    {% trans "Yes, log out" as button_text %}
+    {% #form url=action_url button_text=heading %}
+    {% csrf_token %}
+    {{ redirect_field }}
+    {% /form %}
+    {% /container %}
+{% endblock content %}
