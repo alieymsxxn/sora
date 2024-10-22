@@ -27,7 +27,8 @@
     background-color:  #F9FAFB !important;
 }
 .input:hover, .input:focus {
-    border-color: #226FF9 !important;
+    background-color:  #f0f1f2 !important;
+    /* border-color: #226FF9 !important; */
 }
 
 .my-3 {
