@@ -1,6 +1,7 @@
 from .base import *
 
 # Setting compatible sqlite version for Chromadb
+# https://docs.trychroma.com/troubleshooting#sqlite
 __import__('pysqlite3')
 import sys
 sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
