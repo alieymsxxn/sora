@@ -1,10 +1,13 @@
 import helpers
 from django.db import models
-from django.contrib.auth.models import Group, Permission
-from django.db.models.signals import post_save, pre_delete
 from django.conf import settings
 from django.urls import reverse
+from django.dispatch import receiver
+from django.contrib.auth.models import Group, Permission
+from django.db.models.signals import post_save, pre_delete
 from console.utils.mixins.models import TimeAuditMixin, PriorityMixin
+
+
 User = settings.AUTH_USER_MODEL
 
 PERMISSIONS = [
@@ -24,13 +27,12 @@ class Subscription(TimeAuditMixin, PriorityMixin):
 
     name = models.CharField(max_length=120)
     active = models.BooleanField(default=True)
-    groups = models.ManyToManyField(Group)  # one-to-one
+    groups = models.ManyToManyField(Group)
     permissions = models.ManyToManyField(Permission,
-                                        limit_choices_to={
-                                            'content_type__app_label': 'subscriptions',
-                                            'codename__in': [x[0] for x in PERMISSIONS],
-                                        },
-                                    )
+                                         limit_choices_to={
+                                             'content_type__app_label': 'subscriptions',
+                                             'codename__in': [x[0] for x in PERMISSIONS],
+                                        })
     product_id = models.CharField(max_length=100, null=True, blank=True)
     description = models.TextField(max_length=200, null=True, blank=True)
     features = models.TextField(max_length=200, null=True, blank=True)
@@ -43,11 +45,11 @@ class Subscription(TimeAuditMixin, PriorityMixin):
     def __str__(self):
         return f'{self.name}'
 
+
 class Price(TimeAuditMixin, PriorityMixin):
     '''
     Stripe Price
     '''
-
     class Interval(models.TextChoices):
         MONTHLY = 'month', 'Monthly'
         YEARLY = 'year', 'Yearly'
@@ -60,7 +62,7 @@ class Price(TimeAuditMixin, PriorityMixin):
     price_id = models.CharField(max_length=100, null=True, blank=True)
     interval = models.CharField(max_length=100, default=Interval.MONTHLY, choices=Interval.choices)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=99.99)
-    
+
     @property
     def get_checkout_url(self):
         return reverse(viewname='select_plan', kwargs={'price_id': self.id})
@@ -106,20 +108,22 @@ class Price(TimeAuditMixin, PriorityMixin):
         # Create a price on Stripe
         if self.product_id and self.product_status:
             price_id = helpers.Billing.get_or_create_price(currency=self.currency,
-                                                        unit_amount=self.unit_amount,
-                                                        recurring={'interval': self.interval},
-                                                        product=self.product_id)
-
+                                                           unit_amount=self.unit_amount,
+                                                           recurring={ 'interval': self.interval },
+                                                           product=self.product_id)
             if not Price.objects.filter(subscription=self.subscription, 
                                         price_id=self.price_id) \
                                         .exclude(id=self.id).exists():
                 setattr(self, 'price_id', price_id)
         if self.featured:
-            other = Price.objects.filter(interval=self.interval, subscription=self.subscription) \
-                                .exclude(id=self.id)
+            other = Price.objects.filter(interval=self.interval, 
+                                        subscription=self.subscription) \
+                                        .exclude(id=self.id)
         return super().save(*args, **kwargs)
 
+
 class UserSubscription(models.Model):
+
     class SubscriptionStatus(models.TextChoices):
         ACTIVE = 'active', 'Active'
         TRIALING = 'trialing', 'Trialing'
@@ -129,6 +133,7 @@ class UserSubscription(models.Model):
         CANCELED = 'canceled', 'Canceled'
         UNPAID = 'unpaid', 'Unpaid'
         PAUSED = 'paused', 'Paused'
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     active = models.BooleanField(default=True)
     subscription = models.ForeignKey(Subscription, on_delete=models.SET_NULL, null=True, blank=True)
@@ -160,24 +165,27 @@ class UserSubscription(models.Model):
             self.first_start = self.start
         return super().save(*args, **kwargs)
 
-    def sync_subscription(self):
+    def refresh(self):
         info = helpers.Billing.get_subscription_info(subscription_id=self.mapped_id)
         price = Price.objects.filter(price_id=info.pop('price_id')).first()
         self.price = price
         for attr, value in info.items():
             setattr(self, attr, value)
         self.save()
-        print('Subscription updated!')
 
-def sync_user(sender, instance, *args, **kwargs):
+
+@receiver(signal=post_save, sender=UserSubscription)
+def instate(instance, *args, **kwargs):
     user = instance.user
     groups = instance.subscription.groups.all()
     if not instance.active or kwargs.get('revoke', False):
         return user.groups.remove(*groups)
     groups = groups | user.groups.all()
     user.groups.set(groups)
-post_save.connect(receiver=sync_user, sender=UserSubscription)
+# post_save.connect(receiver=sync_user, sender=UserSubscription)
 
+
+@receiver(signal=pre_delete, sender=UserSubscription)
 def revoke(sender, instance, **kwargs):
-    sync_user(sender=sender, instance=instance, revoke=True)
-pre_delete.connect(receiver=revoke, sender=UserSubscription) 
+    instate(sender=sender, instance=instance, revoke=True)
+# pre_delete.connect(receiver=revoke, sender=UserSubscription)

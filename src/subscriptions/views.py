@@ -10,7 +10,7 @@ def cancel_subscription(request):
     return redirect(to='refresh')
 
 def refresh(request):
-    request.user.usersubscription.sync_subscription()
+    request.user.usersubscription.refresh()
     return redirect(to='profile')
 
 def pricing(request, interval):
