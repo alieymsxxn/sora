@@ -9,6 +9,7 @@ django-allauth[socialaccount]
 django-allauth-ui
 django-widget-tweaks
 stripe
+pysqlite3-binary
 langchain
 langchain_community
 langchain-groq
