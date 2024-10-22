@@ -52,6 +52,12 @@ RUN pip install -r /tmp/requirements.txt
 # database isn't available during build
 # run any other commands that do not need the database
 # such as:
+ARG AWS_ACCESS_KEY_ID
+ARG AWS_SECRET_ACCESS_KEY
+ARG AWS_STORAGE_BUCKET_NAME
+ARG AWS_S3_REGION_NAME
+ARG AWS_S3_CUSTOM_DOMAIN
+    
 ENV DJANGO_SETTINGS_MODULE=sora.settings.production 
 RUN python manage.py fetch_vendor
 RUN python manage.py collectstatic --noinput
