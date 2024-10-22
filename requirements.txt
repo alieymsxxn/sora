@@ -10,6 +10,7 @@ django-allauth-ui
 django-widget-tweaks
 stripe
 pysqlite3-binary
+beautifulsoup4
 langchain
 langchain_community
 langchain-groq
