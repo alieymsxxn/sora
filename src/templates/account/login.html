@@ -3,7 +3,7 @@
 {% load static %}
 {% load allauth_ui %}
 {% load widget_tweaks %}
-{% block head_title %}{% trans 'Log In' %} | Sora{% endblock head_title %}
+{% block head_title %}{% trans 'Log in' %} - Sora{% endblock head_title %}
 {% block content %}
     <!-- {% trans "Log In" as heading %} -->
     {% url "account_signup" as signup_url %} 
@@ -19,7 +19,7 @@
 		    <a class="link" href="{{ signup_url }}">sign up</a> first.</span>{% endblocktranslate %}
         </div> -->
         {% url 'signin' as action_url %}
-        {% #form form=form url=action_url button_text='LOGIN' %}
+        {% #form form=form url=action_url button_text='Login' %}
         {% csrf_token %}
         <div class="items-start my-2 form-control flex flex-row justify-between">
             <label class="cursor-pointer label">

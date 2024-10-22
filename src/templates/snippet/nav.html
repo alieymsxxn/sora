@@ -87,6 +87,12 @@
         </button> -->
         {% if user.is_authenticated %}
         <!-- Notifications -->
+        <p>Current page: {{ request.path }}</p>
+        <a class="me-3 py-2 text-sm px-4 bg-blue-700 text-white rounded-md shadow-md hover:bg-blue-800 focus:outline-none flex items-center justify-between font-light" href="{% url 'dashboard' %}">Go to dashboard
+          <svg class="w-6 h-6 text-white-800 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="15" height="20" fill="none" viewBox="0 0 24 24">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 12H5m14 0-4 4m4-4-4-4"/>
+        </svg>
+        </a>
         <button
           type="button"
           data-dropdown-toggle="notification-dropdown"
@@ -613,11 +619,11 @@
           <div class="py-3 px-4">
             <span
               class="block text-sm font-semibold text-gray-900 dark:text-white"
-              >Neil Sims</span
+              >{{ user.name }}</span
             >
             <span
               class="block text-sm text-gray-900 truncate dark:text-white"
-              >name@flowbite.com</span
+              >{{ user.email }}</span
             >
           </div>
           <ul
@@ -626,7 +632,7 @@
           >
             <li>
               <a
-                href="#"
+                href="{% url 'profile' %}"
                 class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white"
                 >My profile</a
               >
@@ -722,16 +728,26 @@
           >
             <li>
               <a
-                href="#"
+                href="{% url 'account_logout' %}"
                 class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                >Sign out</a
+                >Log out</a
               >
             </li>
           </ul>
         </div>
         {% else %}
-        
-        <a class="py-2 px-5 bg-blue-700 text-white rounded-md shadow-md hover:bg-blue-800 focus:outline-none" href="{% url 'pricing' interval='monthly' %}">Get Started</a>
+        <a class="text-base ms-5 me-3 font-medium" href="{% url 'landing' %}">Blog
+        </a>
+        <a class="text-base ms-5 me-3 font-medium" href="{% url 'pricing' interval='monthly' %}">Pricing 
+        </a>
+        <a class="text-base ms-5 me-5 font-medium" href="{% url 'landing' %}">About us 
+        </a>
+        <span class="border-l ms-5 me-5" > </span>
+        <a class="py-2 text-sm px-4 bg-blue-700 text-white rounded-md shadow-md hover:bg-blue-800 focus:outline-none flex items-center justify-between font-light" href="{% url 'account_login' %}">Log in 
+          <svg class="w-6 h-6 text-white-800 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="15" height="20" fill="none" viewBox="0 0 24 24">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 12H5m14 0-4 4m4-4-4-4"/>
+        </svg>
+        </a>
         {% endif %}
       </div>
     </div>

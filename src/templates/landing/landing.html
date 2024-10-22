@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
-
-{% block head_title %}Home - {{ block.super }}{% endblock head_title %}
+<!-- {% block templatecss %} {% include 'landing/css/css.html' %} {% endblock templatecss %} -->
+{% block head_title %}Generate A Free Cold Email - {{ block.super }}{% endblock head_title %}
 {% block content %}
+{% include 'landing/snippets/demo.html' %}
 {% include 'landing/snippets/hero.html' %}
 {% endblock content %}
