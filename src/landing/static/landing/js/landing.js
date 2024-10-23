@@ -56,6 +56,31 @@ function validate_fields() {
     return valid
 }
 
+function reset_form (fields_error) {
+    document.getElementById('email-label').classList.add("hidden")
+    document.getElementById('email-loader').classList.add("hidden")
+    document.getElementById('content-container').classList.add("hidden")
+    document.getElementById('email-view').classList.add('hidden');
+    document.getElementById('content-btn-group').classList.add("hidden");
+    document.getElementById('form-container').classList.remove("hidden")
+    console.log(fields_error)
+    // for (let field in fields_reset) {
+    //     document.getElementById(field).value = '';
+    // }
+    fields_error.map(function(field) {
+        document.getElementById(field+'_label').classList.replace("text-gray-900", "text-red-600")
+        document.getElementById(field).classList.add('input-red')
+        document.getElementById(field+'_error_msg').innerText = 'The data provided is invalid. Try again with something else.'
+    });
+    // for (let field in fields_error) {
+    //     console.log(field+'_label')
+    //     console.log(field)
+    //     console.log(field+'_error_msg')
+        // document.getElementById(field+'_label').classList.replace("text-gray-900", "text-red-600")
+        // document.getElementById(field).classList.add('input-red')
+        // document.getElementById(field+'_error_msg').innerText = 'The data provided is invalid. Try again with something else.'
+    // }
+}
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('copy-email-btn').addEventListener('click', function (event) {
         button = event.target
@@ -102,14 +127,16 @@ document.addEventListener('DOMContentLoaded', function () {
         xhr.onload = function () {
             if (xhr.status >= 200 && xhr.status < 300) {
                 const obj = JSON.parse(xhr.responseText)
-                var email = obj.email
-                console.log(email)
-                document.getElementById('email-view').innerHTML = email;
+                console.log(obj)
+                document.getElementById('email-view').innerHTML = obj.body;
                 document.getElementById('email-view').classList.remove('hidden');
                 document.getElementById('email-loader').classList.add("hidden");
                 document.getElementById('content-btn-group').classList.remove("hidden");
             } else {
-                alert('Request failed. Status: ' + xhr.status);
+                const obj = JSON.parse(xhr.responseText)
+                console.log('Request failed. Status: ' + obj.error)
+                fields_error = [obj.error]
+                reset_form(fields_error=fields_error)
             }
         }
         xhr.send(data);

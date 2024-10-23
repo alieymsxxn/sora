@@ -32,20 +32,30 @@ class GenerationManager:
             ### SCRAPED TEXT FROM WEBSITE:
             {content}
             ### INSTRUCTION:
-            The scraped text is from the career's page of a website.
+            The scraped text is from the job post page of a website.
             Your job is to extract the job postings and return them in JSON format containing the following keys: `role`, `experience`, `skills` and `description`.
+            You should verify that the scraped text fullfills following conditions:
+            1) The scraped text is adequate enough to extract all the required information mentioned above.
+            2) The scraped text is relevant to a job post.
+            If these conditions are not fullfiled add a key `success` with value false and if they are fullsilled add a key `success` with value true.
+            Fields you should return:
+            1) `success`
+            2) `role`
+            3) `experience`
+            4) `skills`
+            5) `description`
             Only return the valid JSON.
             ### VALID JSON (NO PREAMBLE):
             """
         )
         chain = prompt | self.client
-        reponse = chain.invoke(input={"content": content})
+        response = chain.invoke(input={"content": content})
         try:
             json_parser = JsonOutputParser()
-            reponse = json_parser.parse(reponse.content)
+            response = json_parser.parse(response.content)
         except OutputParserException:
             raise OutputParserException("Context too big. Unable to parse jobs.")
-        return reponse
+        return response
 
     def generate_demo_email(self, job_description:str, services:str):
         # We have the data from jd, we need to query chromadb for portfolio
@@ -58,14 +68,25 @@ class GenerationManager:
             {services}
 
             ### INSTRUCTION:
-            Your job is to write a cold email to the client regarding the job mentioned above describing the serives mentioned above
-            Do not provide a preamble. 
+            Your job is to write a cold email to the client regarding the job mentioned above describing the provided serives mentioned above.
+            Your job is to return in JSON format containing the following keys: `success`, `subject` and `body`.
+            Provided services text needs to fulfill following conditions:
+            1) It should mention services,
+            2) It should not be something irrelevant.
+            If the provided services text does not fullfill these condtions, value for `success` should be talse and all other keys empty.
+            If the provided services text fullfills these conditions, value for `success` should be true and all other keys should have their respective values.
+            Do not provide a preamble.
             ### EMAIL (NO PREAMBLE):
             """
         )
         chain_email = prompt | self.client
         response = chain_email.invoke({"job_description": str(job_description), "services": services})
-        return response.content
+        try:
+            json_parser = JsonOutputParser()
+            response = json_parser.parse(response.content)
+        except OutputParserException:
+            raise OutputParserException("Context too big. Unable to parse jobs.")
+        return response
 
     def generate_email(self, job_description:str, portfolio_links:List[str]):
         # We have the data from jd, we need to query chromadb for portfolio

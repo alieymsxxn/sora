@@ -16,7 +16,8 @@ def generate_demo_email(request):
         data = json.loads(request.body) 
         job_url = data['job_url']
         services = data['services']
-        email = GenerationFacade.generate_demo_email(url=job_url,services=services)
-        data = {'email': email}
-        return JsonResponse(data)
-    return JsonResponse({'message': 'Invalid request', 'status': 'fail'}, status=400)
+        status, data = GenerationFacade.generate_demo_email(url=job_url, services=services)
+        if status:
+            return JsonResponse(data=data, status=200)
+        else:
+            return JsonResponse(data={'error': data}, status=300)
