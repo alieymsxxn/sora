@@ -33,4 +33,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Contact
 
-For inquiries or feedback, please reach out at [your_email@example.com](mailto:your_email@example.com).
+For inquiries or feedback, please reach out at [your_email@example.com](mailto:mohsinalisep@gmail.com).
