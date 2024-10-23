@@ -25,11 +25,11 @@ urlpatterns = [
     # path('github/login/', oauth2_login, name='github-login'),
     path('', include('landing.urls')),
     path('', include('generative.urls')),
-    path('', include('dashboard.urls')),
+    # path('', include('dashboard.urls')),
     # path('', include('visits.urls')), # index page / root page
-    path('', include('checkouts.urls')),
-    path('', include('customers.urls')),
-    path('accounts/', include('allauth.urls')),
-    path('', include('subscriptions.urls')),
-    path('admin/', admin.site.urls),
+    # path('', include('checkouts.urls')),
+    # path('', include('customers.urls')),
+    # path('accounts/', include('allauth.urls')),
+    # path('', include('subscriptions.urls')),
+    # path('admin/', admin.site.urls),
 ]
