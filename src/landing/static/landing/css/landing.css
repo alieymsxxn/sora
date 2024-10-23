@@ -1,9 +1,8 @@
 .body {
-  height: 450px;
+  height: 600px;
 }
 
 .landing-grid {
-    margin-top: 60px;
     background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
     background-size: 16px 16px;
     -webkit-mask-image: radial-gradient(
@@ -51,6 +50,14 @@ nav {
   word-wrap: break-word;
   overflow: auto;
   height: 350px;
+  width: 700px;
+  font-size: 12px;
+  background: #fbfcfc;
+}
+.gen-subject-content pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow: auto;
   width: 700px;
   font-size: 12px;
   background: #fbfcfc;

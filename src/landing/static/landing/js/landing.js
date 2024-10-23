@@ -56,44 +56,40 @@ function validate_fields() {
     return valid
 }
 
-function reset_form (fields_error) {
+function reset_form(fields_error) {
     document.getElementById('email-label').classList.add("hidden")
+    document.getElementById('subject-label').classList.add("hidden")
     document.getElementById('email-loader').classList.add("hidden")
+    document.getElementById('subject-loader').classList.add("hidden")
     document.getElementById('content-container').classList.add("hidden")
     document.getElementById('email-view').classList.add('hidden');
+    document.getElementById('subject-view').classList.add('hidden');
     document.getElementById('content-btn-group').classList.add("hidden");
     document.getElementById('form-container').classList.remove("hidden")
-    console.log(fields_error)
-    // for (let field in fields_reset) {
-    //     document.getElementById(field).value = '';
-    // }
-    fields_error.map(function(field) {
-        document.getElementById(field+'_label').classList.replace("text-gray-900", "text-red-600")
+    fields_error.map(function (field) {
+        document.getElementById(field + '_label').classList.replace("text-gray-900", "text-red-600")
         document.getElementById(field).classList.add('input-red')
-        document.getElementById(field+'_error_msg').innerText = 'The data provided is invalid. Try again with something else.'
+        document.getElementById(field + '_error_msg').innerText = 'The data provided is invalid. Try again with something else.'
     });
-    // for (let field in fields_error) {
-    //     console.log(field+'_label')
-    //     console.log(field)
-    //     console.log(field+'_error_msg')
-        // document.getElementById(field+'_label').classList.replace("text-gray-900", "text-red-600")
-        // document.getElementById(field).classList.add('input-red')
-        // document.getElementById(field+'_error_msg').innerText = 'The data provided is invalid. Try again with something else.'
-    // }
 }
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('copy-email-btn').addEventListener('click', function (event) {
         button = event.target
-        let textNode = button.childNodes[2];  // Get the text node
+        let textNode = button.childNodes[2];
         textNode.textContent = "Copied";
+        var subject = document.getElementById("subject-view");
         var email = document.getElementById("email-view");
-        navigator.clipboard.writeText(email.textContent);
+        to_copy = 'Subject: ' + subject.textContent + '\n\n' + email.textContent
+        navigator.clipboard.writeText(to_copy);
     });
     document.getElementById('reset-form-btn').addEventListener('click', function () {
         document.getElementById('email-label').classList.add("hidden")
+        document.getElementById('subject-label').classList.add("hidden")
         document.getElementById('email-loader').classList.add("hidden")
+        document.getElementById('subject-loader').classList.add("hidden")
         document.getElementById('content-container').classList.add("hidden")
         document.getElementById('email-view').classList.add('hidden');
+        document.getElementById('subject-view').classList.add('hidden');
         document.getElementById('content-btn-group').classList.add("hidden");
         document.getElementById('form-container').classList.remove("hidden")
         document.getElementById('url').value = '';
@@ -108,7 +104,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         document.getElementById('form-container').classList.add("hidden")
         document.getElementById('email-label').classList.remove("hidden")
+        document.getElementById('subject-label').classList.remove("hidden")
         document.getElementById('email-loader').classList.remove("hidden")
+        document.getElementById('subject-loader').classList.remove("hidden")
         document.getElementById('content-container').classList.remove("hidden")
 
 
@@ -130,13 +128,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.log(obj)
                 document.getElementById('email-view').innerHTML = obj.body;
                 document.getElementById('email-view').classList.remove('hidden');
+                document.getElementById('subject-view').innerHTML = obj.subject;
+                document.getElementById('subject-view').classList.remove('hidden');
                 document.getElementById('email-loader').classList.add("hidden");
+                document.getElementById('subject-loader').classList.add("hidden");
                 document.getElementById('content-btn-group').classList.remove("hidden");
             } else {
                 const obj = JSON.parse(xhr.responseText)
                 console.log('Request failed. Status: ' + obj.error)
                 fields_error = [obj.error]
-                reset_form(fields_error=fields_error)
+                reset_form(fields_error = fields_error)
             }
         }
         xhr.send(data);
