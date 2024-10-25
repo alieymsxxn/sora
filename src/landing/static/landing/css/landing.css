@@ -3,18 +3,11 @@
 }
 
 .landing-grid {
-    background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
-    background-size: 16px 16px;
-    -webkit-mask-image: radial-gradient(
-    ellipse 70% 70% at 50% 50%,
-    #000 60%,
-    transparent 100%
-  );
-  mask-image: radial-gradient(
-    ellipse 70% 70% at 50% 50%,
-    #000 60%,
-    transparent 100%
-  );
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+  background-size: 16px 16px;
     min-height: 100vh;
     max-height: 100vh;
     padding: 10px;
