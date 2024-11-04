@@ -1,0 +1,10 @@
+{% load static %}
+<div id="message-box" class="w-full h-full">
+    <div class="chatbox bg-white rounded-xl">
+        {% include 'chat/dashboard/partials/message_box/header.html' %}
+        {% include 'chat/dashboard/partials/message_box/messages_list.html' %}
+    </div>
+    <div class="inputbox my-4">
+        {% include 'chat/dashboard/partials/message_box/message_input.html' %}
+    </div>
+</div>

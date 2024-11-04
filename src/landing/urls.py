@@ -3,5 +3,5 @@ from landing.views import landing
 
 
 urlpatterns = [
-    path(route='', view=landing, name='landing')
+    path(route='landing', view=landing, name='landing')
 ]

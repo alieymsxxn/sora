@@ -1,0 +1,5 @@
+<ul id="dropdown-{{list_type}}-list" class="{% if hidden %} hidden {% endif %} py-2 space-y-2">
+    {% for obj in list_obj %}
+        {% include 'chat/dashboard/partials/sidebar_list_item.html' with obj=obj type=list_type %}
+    {% endfor %}
+</ul>

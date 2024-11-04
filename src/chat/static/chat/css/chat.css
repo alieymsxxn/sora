@@ -1,0 +1,32 @@
+aside {
+    background: #EDF0F0;
+}
+main {
+    position: fixed;
+    top: 63px;
+    left: 256px;
+    width: 70%;
+    height: 100%;
+    background: #EDF0F0;
+}
+main .chatbox {
+    height: 85%;
+}
+main .inputbox {
+    height: 15%;
+}
+.chatbox-header {
+    border-bottom: 2px solid #F5F7F8;
+}
+main .chatbox-body {
+    height: 90%;
+    overflow-y: auto;
+}
+.chatbox-header .avatar-group {
+    width: 32px;
+    height: 32px;
+}
+
+.msg-non-native {
+    flex-direction: row-reverse;
+}

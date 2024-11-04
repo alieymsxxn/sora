@@ -1,0 +1,8 @@
+<div id="messages-list" class="py-5 px-5 chatbox-body" scrollb {% if is_counsumer %} hx-swap-oob='beforeend' {% endif %}>
+    {% for message in messages %}
+        {% include 'chat/dashboard/partials/message_box/message_item.html' with message=message %}
+    {% endfor %}
+</div>
+<script>
+    scrollToBottom('[scrollb]')
+</script>

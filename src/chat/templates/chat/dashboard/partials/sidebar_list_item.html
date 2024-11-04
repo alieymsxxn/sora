@@ -1,0 +1,32 @@
+{% load static %}
+<button
+    {% if type == 'channels' %}
+    hx-get="{% url 'channels' slug=obj.slug %}"
+    {% elif type == 'friends' %}
+    hx-get="{% url 'private_channels' client_friend=user.username|add:"-"|add:obj.username %}"
+    {% endif %}
+    hx-target="#message-box" 
+    hx-trigger="click"
+    class="flex items-center w-full px-2 py-2 justify-between text-base font-medium text-gray-900 transition duration-75 group dark:text-white">
+    <span class="flex items-center">
+        <span class="icon px-2">
+            {% if type == 'friends' %}
+            <img class="rounded-full w-7 h-7" src="{% static 'chat/assets/friends.png'%}" alt="">
+            {% else %}
+            #
+            {% endif %}
+        </span>
+        <span class="title px-2 text-sm font-semibold text-gray-600">
+            {% if type == 'friends' %}
+                {{obj.username|title}}
+            {% else %}
+                {{obj.name|title}}
+            {% endif %}
+        </span>
+    </span>
+    <span class="extras">
+        <svg aria-hidden="true" class="w-5 h-5 text-gray-400 font-light" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+        </svg>
+    </span>
+</button>

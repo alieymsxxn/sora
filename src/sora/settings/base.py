@@ -45,6 +45,7 @@ STARTED_APPS = [
     'checkouts',
     'generative',
     'landing',
+    'chat'
 ]
 
 # Vendor apps definition
@@ -56,9 +57,11 @@ VENDOR_APPS = [
     'allauth.socialaccount.providers.github',
     "widget_tweaks",
     'slippers',
+    'django_htmx',
 ]
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -81,7 +84,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
     'console.utils.middleware.subscription.SubscriptionMiddleware',
-    'console.utils.middleware.profile.ProfileMiddleware'
+    'console.utils.middleware.profile.ProfileMiddleware',
+    'django_htmx.middleware.HtmxMiddleware',
 ]
 
 ROOT_URLCONF = 'sora.urls'
@@ -103,8 +107,9 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'sora.wsgi.application'
+# WSGI_APPLICATION = 'sora.wsgi.application'
 
+ASGI_APPLICATION = 'sora.asgi.application'
 
 DATABASES = {
     'default': {

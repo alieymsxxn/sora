@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block templatecss %} {% include 'chat/css/css.html' %} {% endblock templatecss %}
+
+{% block head_title %}Home - {{ block.super }}{% endblock head_title %}
+{% block content %}
+
+<div class="w-full h-full flex flex-column items-center justify-center bg-gray-500">
+
+    <div class="bg-gray-100 flex flex-col chat-box">
+        <div class="top w-full flex flex-col justify-start items-center bg-white">
+            <label class="text-gray-700 font-medium text py-2">{{ group.name }}</label>
+            {% include 'chat/partials/online_count.html' %}
+        </div>
+        {% include 'chat/partials/bubbles.html'%}
+        <div class="bottom w-full flex flow-row">
+            <form class="flex justify-between w-full msg-form"
+                hx-ext="ws"
+                ws-connect="/ws/chatroom/public-chat"
+                ws-send
+                _="on htmx:wsAfterSend reset() me"
+                {% csrf_token %}
+                <!-- <input type="text" name="body" id=""> -->
+                {{ form.body }}
+                <!-- <button>Send</button> -->
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+{% block templatejs %}
+<script src="https://unpkg.com/htmx.org@1.9.3"></script>
+<script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/ws.js"></script>
+<script src="https://unpkg.com/hyperscript.org@0.9.13"></script>
+<script>
+scrollToBottom('[scrollb]')
+function scrollToBottom(id) {
+    const element = document.querySelectorAll(id)[0];
+    element.scrollTop = element.scrollHeight;
+}
+</script>
+{% endblock templatejs %}

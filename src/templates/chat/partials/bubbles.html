@@ -1,0 +1,5 @@
+<div id='chat-box' scrollb class="body grow w-full bg-white px-4 py-2 scrollable-container" hx-swap-oob='beforeend'>
+    {% for message in messages %}
+    {% include 'chat/partials/bubble.html' with author=message.author created=message.created body=message.body %}
+    {% endfor %}
+</div>
